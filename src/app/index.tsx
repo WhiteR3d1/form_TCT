@@ -36,27 +36,34 @@ export default function Index() {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     justifyContent: 'center',
-    paddingHorizontal: 20,
-    backgroundColor: '#d0d0d0d0',
-    padding: 10,
+    paddingHorizontal: 24,
+    backgroundColor: '#F7F7F8',
   },
   display: {
-    backgroundColor: '#03c672',
-    color: 'white',
+    backgroundColor: '#FFFFFF',
+    color: '#111111',
     fontSize: 32,
-    padding: 20
+    fontWeight: '600',
+    textAlign: 'center',
+    padding: 28,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: '#E8E8EA',
+    marginBottom: 12,
   },
   button: {
-    backgroundColor: '#007AFF',
-    padding: 12,
-    borderRadius: 8,
-    margin: 10,
+    backgroundColor: '#111111',
+    paddingVertical: 14,
+    paddingHorizontal: 12,
+    borderRadius: 999,
+    marginVertical: 8,
   },
   button_label: {
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 32,
+    color: '#FFFFFF',
+    fontWeight: '600',
+    fontSize: 22,
     textAlign: 'center',
   }
 })

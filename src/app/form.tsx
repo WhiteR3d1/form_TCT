@@ -20,7 +20,8 @@ export default function Form() {
         isAgree: false,
     })
     return (
-        <SafeAreaView>
+        <SafeAreaView style={{ flex: 1 }}>
+            <ScrollView style={{ backgroundColor: '#F7F7F8' }}>
             <View style={styles.container}>
                 <ScrollView style={styles.display}>
                     <Text>Name: {data.name} </Text>
@@ -40,11 +41,11 @@ export default function Form() {
                     onValueChange={value => setData({ ...data, gender: value })}>
                     <Text style={{ fontWeight: 'bold' }}>Gender: </Text>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <RadioButton value="Male" />
+                        <RadioButton value="Male" color="#111111" />
                         <Text>Male</Text>
                     </View>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <RadioButton value="Female" />
+                        <RadioButton value="Female" color="#111111" />
                         <Text>Female</Text>
                     </View>
                 </RadioButton.Group>
@@ -54,6 +55,7 @@ export default function Form() {
                         paddingBottom: 10,
                     }}>Department: </Text>
                     <Dropdown data={depts}
+                        style={styles.dropdown}
                         maxHeight={300}
                         labelField="label"
                         valueField="value"
@@ -75,46 +77,69 @@ export default function Form() {
                 </View>
                 <View style={styles.switch_container}>
                     <Text>Do you agree?</Text>
-                    <Switch trackColor={{ true: '#47F', false: 'grey' }}
-                        thumbColor='pink'
+                    <Switch trackColor={{ true: '#111111', false: '#D1D1D6' }}
+                        thumbColor='#FFFFFF'
                         value={data.isAgree}
                         onValueChange={(value) => setData({ ...data, isAgree: value })} />
                 </View>
             </View>
+            </ScrollView>
         </SafeAreaView>
     )
 }
 const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
-        paddingHorizontal: 20,
-        backgroundColor: '#F5F5F5',
+        paddingHorizontal: 24,
+        backgroundColor: '#F7F7F8',
         padding: 5,
     },
     input: {
-        height: 50,
-        borderColor: '#ccc',
-        padding: 10,
-        borderRadius: 5,
-        backgroundColor: 'white',
+        height: 52,
+        borderColor: '#E8E8EA',
+        borderWidth: 1,
+        paddingHorizontal: 16,
+        borderRadius: 14,
+        backgroundColor: '#FFFFFF',
+        fontSize: 16,
+        color: '#111111',
+        marginTop: 8,
     },
     display: {
         height: 120,
-        padding: 10,
-        backgroundColor: 'pink',
+        padding: 16,
+        backgroundColor: '#FFFFFF',
         paddingHorizontal: 20,
+        borderRadius: 20,
+        borderWidth: 1,
+        borderColor: '#E8E8EA',
+        marginTop: 10,
     },
     comment: {
         height: 80,
-        borderColor: '#ccc',
+        borderColor: '#E8E8EA',
+        borderWidth: 1,
         marginBottom: 15,
-        padding: 10,
-        borderRadius: 5,
-        backgroundColor: 'white',
+        padding: 12,
+        paddingHorizontal: 16,
+        borderRadius: 14,
+        backgroundColor: '#FFFFFF',
+        fontSize: 16,
+        color: '#111111',
+        marginTop: 8,
+    },
+    dropdown: {
+        height: 52,
+        borderColor: '#E8E8EA',
+        borderWidth: 1,
+        paddingHorizontal: 16,
+        borderRadius: 14,
+        backgroundColor: '#FFFFFF',
     },
     switch_container: {
         flexDirection: 'row',
         justifyContent: 'space-between',
+        alignItems: 'center',
         paddingVertical: 20,
-    }
+    },
 })

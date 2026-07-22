@@ -11,10 +11,19 @@ export default function Arith() {
             <View style={styles.result}>
                 <Text style={{
                     textAlign: 'center',
-                    fontSize: 24,
-                    fontWeight: 'bold',
-                }}>Result:</Text>
-                <Text style={{ fontSize: 18 }}>{z}</Text>
+                    fontSize: 15,
+                    fontWeight: '600',
+                    color: '#8A8A8E',
+                    textTransform: 'uppercase',
+                    letterSpacing: 1,
+                }}>Result</Text>
+                <Text style={{
+                    fontSize: 32,
+                    fontWeight: '600',
+                    color: '#111111',
+                    textAlign: 'center',
+                    marginTop: 6,
+                }}>{z}</Text>
             </View>
             <View>
                 <TextInput style={styles.input}
@@ -29,13 +38,23 @@ export default function Arith() {
                     placeholder="Enter Number" />
             </View>
             <View style={styles.button_pack}>
-                <Button title=" ADD " onPress={() => {
+                <Button title=" ADD " color="#111111" onPress={() => {
                     setZ(String(Number(x) + Number(y)));
                 }} />
-                <Button title=" SUB " onPress={() => {
+                <Button title=" SUB " color="#111111" onPress={() => {
                     setZ(String(Number(x) - Number(y)));
                 }} />
-                <Button title="Reset" onPress={() => {
+                <Button title=" MUL " color="#111111" onPress={() => {
+                    setZ(String(Number(x) * Number(y)));
+                }} />
+                <Button title=" DIV " color="#111111" onPress={() => {
+                    if (Number(y) === 0) {
+                        setZ("Error: Division by zero");
+                    } else {
+                        setZ(String(Number(x) / Number(y)));
+                    }
+                }} />
+                <Button title="Reset" color="#8A8A8E" onPress={() => {
                     setZ("0");
                     setX("");
                     setY("");
@@ -49,30 +68,36 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        paddingHorizontal: 20,
-        backgroundColor: '#F5F5F5',
+        paddingHorizontal: 24,
+        backgroundColor: '#F7F7F8',
     },
     result: {
-        backgroundColor: '#CFC',
-        padding: 20,
-        borderRadius: 10,
-        borderColor: 'black',
+        backgroundColor: '#FFFFFF',
+        padding: 24,
+        borderRadius: 20,
+        borderWidth: 1,
+        borderColor: '#E8E8EA',
         marginVertical: 20,
     },
     input: {
-        height: 50,
-        borderColor: '#ccc',
+        height: 52,
+        borderColor: '#E8E8EA',
         borderWidth: 1,
-        marginBottom: 15,
-        padding: 10,
-        borderRadius: 5,
+        marginBottom: 14,
+        paddingHorizontal: 16,
+        borderRadius: 14,
+        backgroundColor: '#FFFFFF',
+        fontSize: 16,
+        color: '#111111',
     },
     button_pack: {
         flexDirection: 'row',
         justifyContent: 'space-evenly',
-        backgroundColor: '#DDD',
-        padding: 20,
-        borderRadius: 10,
-        borderColor: 'black',
+        backgroundColor: '#FFFFFF',
+        padding: 16,
+        borderRadius: 20,
+        borderWidth: 1,
+        borderColor: '#E8E8EA',
+        marginTop: 8,
     },
 });
