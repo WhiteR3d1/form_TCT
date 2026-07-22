@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ScrollView, StyleSheet, Switch, Text, TextInput, View } from "react-native";
+import { Modal, ScrollView, StyleSheet, Switch, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { Dropdown } from 'react-native-element-dropdown'; // npm i ....
 import { RadioButton } from 'react-native-paper'; // npm install ....
 import { SafeAreaView } from "react-native-safe-area-context"; // npm i ....
@@ -19,17 +19,11 @@ export default function Form() {
         comment: '',
         isAgree: false,
     })
+    const [showPopup, setShowPopup] = useState(false);
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <ScrollView style={{ backgroundColor: '#F7F7F8' }}>
             <View style={styles.container}>
-                <ScrollView style={styles.display}>
-                    <Text>Name: {data.name} </Text>
-                    <Text>Gender: {data.gender}</Text>
-                    <Text>Dept: {data.dept}</Text>
-                    <Text>Comment: {data.comment}</Text>
-                    <Text>Agree: {data.isAgree ? 'Yes' : 'No'}</Text>
-                </ScrollView>
                 <View style={{ paddingVertical: 20 }}>
                     <Text style={{ fontWeight: 'bold' }}>Name: </Text>
                     <TextInput style={styles.input}
@@ -82,6 +76,29 @@ export default function Form() {
                         value={data.isAgree}
                         onValueChange={(value) => setData({ ...data, isAgree: value })} />
                 </View>
+                <TouchableOpacity style={styles.submit_button}
+                    onPress={() => setShowPopup(true)}>
+                    <Text style={styles.submit_label}>Confirm</Text>
+                </TouchableOpacity>
+                <Modal visible={showPopup}
+                    transparent
+                    animationType="fade"
+                    onRequestClose={() => setShowPopup(false)}>
+                    <View style={styles.popup_overlay}>
+                        <View style={styles.popup_card}>
+                            <Text style={styles.popup_title}>Your Information</Text>
+                            <Text style={styles.popup_text}>Name: {data.name}</Text>
+                            <Text style={styles.popup_text}>Gender: {data.gender}</Text>
+                            <Text style={styles.popup_text}>Dept: {data.dept}</Text>
+                            <Text style={styles.popup_text}>Comment: {data.comment}</Text>
+                            <Text style={styles.popup_text}>Agree: {data.isAgree ? 'Yes' : 'No'}</Text>
+                            <TouchableOpacity style={styles.popup_button}
+                                onPress={() => setShowPopup(false)}>
+                                <Text style={styles.submit_label}>OK</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </Modal>
             </View>
             </ScrollView>
         </SafeAreaView>
@@ -104,16 +121,6 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: '#111111',
         marginTop: 8,
-    },
-    display: {
-        height: 120,
-        padding: 16,
-        backgroundColor: '#FFFFFF',
-        paddingHorizontal: 20,
-        borderRadius: 20,
-        borderWidth: 1,
-        borderColor: '#E8E8EA',
-        marginTop: 10,
     },
     comment: {
         height: 80,
@@ -141,5 +148,46 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         paddingVertical: 20,
+    },
+    submit_button: {
+        backgroundColor: '#111111',
+        paddingVertical: 14,
+        borderRadius: 999,
+        marginBottom: 20,
+    },
+    submit_label: {
+        color: '#FFFFFF',
+        fontWeight: '600',
+        fontSize: 16,
+        textAlign: 'center',
+    },
+    popup_overlay: {
+        flex: 1,
+        backgroundColor: 'rgba(0, 0, 0, 0.4)',
+        justifyContent: 'center',
+        paddingHorizontal: 40,
+    },
+    popup_card: {
+        backgroundColor: '#FFFFFF',
+        borderRadius: 20,
+        padding: 24,
+    },
+    popup_title: {
+        fontSize: 18,
+        fontWeight: '600',
+        color: '#111111',
+        textAlign: 'center',
+        marginBottom: 16,
+    },
+    popup_text: {
+        fontSize: 15,
+        color: '#111111',
+        marginBottom: 6,
+    },
+    popup_button: {
+        backgroundColor: '#111111',
+        paddingVertical: 12,
+        borderRadius: 999,
+        marginTop: 16,
     },
 })

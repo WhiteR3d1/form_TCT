@@ -12,24 +12,27 @@ export default function Index() {
   const reset = () => {
     setCount(0);
   }
-  
+
 
   return (
     <View style={styles.container}>
       <Text style={styles.display}>Count: {count}</Text>
-      <TouchableOpacity style={styles.button}
-        onPress={() => setCount(count + 1)}>
-        <Text style={styles.button_label}> + </Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button}
-        onPress={dec}>
-        <Text style={styles.button_label}> - </Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button}
-        onPress={reset}>
-        <Text style={styles.button_label}> Reset </Text>
-      </TouchableOpacity>
+      <View style={styles.button_row}>
+        <TouchableOpacity style={styles.button}
+          onPress={dec}>
+          <Text style={styles.button_label}> - </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button}
+          onPress={reset}>
+          <Text style={styles.button_label}> Reset </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button}
+          onPress={() => setCount(count + 1)}>
+          <Text style={styles.button_label}> + </Text>
+        </TouchableOpacity>
+      </View>
     </View>
+
 
   );
 }
@@ -54,6 +57,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   button: {
+    flex: 1,
     backgroundColor: '#111111',
     paddingVertical: 14,
     paddingHorizontal: 12,
@@ -65,6 +69,11 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     fontSize: 22,
     textAlign: 'center',
-  }
+  },
+  button_row: {
+    flexDirection: 'row',
+    gap: 12,
+    justifyContent: 'center',
+  },
 })
 

@@ -4,7 +4,9 @@ import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 export default function Arith() {
     const [x, setX] = useState("");
     const [y, setY] = useState("");
+    const [sum, setSum] = useState("");
     const [z, setZ] = useState("0");
+
 
     return (
         <View style={styles.container}>
@@ -17,6 +19,13 @@ export default function Arith() {
                     textTransform: 'uppercase',
                     letterSpacing: 1,
                 }}>Result</Text>
+                <Text style={{
+                    fontSize: 32,
+                    fontWeight: '600',
+                    color: '#111111',
+                    textAlign: 'center',
+                    marginTop: 6,
+                }}>{sum}</Text>
                 <Text style={{
                     fontSize: 32,
                     fontWeight: '600',
@@ -38,36 +47,52 @@ export default function Arith() {
                     placeholder="Enter Number" />
             </View>
             <View style={styles.button_pack}>
-                <Button title=" ADD " color="#111111" onPress={() => {
-                    setZ(String(Number(x) + Number(y)));
-                }} />
-                <Button title=" SUB " color="#111111" onPress={() => {
-                    setZ(String(Number(x) - Number(y)));
-                }} />
-                <Button title=" MUL " color="#111111" onPress={() => {
-                    setZ(String(Number(x) * Number(y)));
-                }} />
-                <Button title=" DIV " color="#111111" onPress={() => {
-                    if (Number(y) === 0) {
-                        setZ("Error: Division by zero");
-                    } else {
-                        setZ(String(Number(x) / Number(y)));
-                    }
-                }} />
-                <Button title="Reset" color="#8A8A8E" onPress={() => {
-                    setZ("0");
-                    setX("");
-                    setY("");
-                }} />
+                <View style={styles.btn}>
+                    <Button title=" + " color="#111111" onPress={() => {
+                        setSum(`${x} + ${y}`);
+                        setZ(String(Number(x) + Number(y)));
+                    }} />
+                </View>
+                <View style={styles.btn}>
+                    <Button title=" - " color="#111111" onPress={() => {
+                        setSum(`${x} - ${y}`);
+                        setZ(String(Number(x) - Number(y)));
+                    }} />
+                </View>
+                <View style={styles.btn}>
+                    <Button title=" × " color="#111111" onPress={() => {
+                        setSum(`${x} × ${y}`);
+                        setZ(String(Number(x) * Number(y)));
+                    }} />
+                </View>
+                <View style={styles.btn}>
+                    <Button title=" ÷ " color="#111111" onPress={() => {
+                        setSum(`${x} ÷ ${y}`);
+                        if (Number(y) === 0) {
+                            setZ("Error: Division by zero");
+                        } else {
+                            setZ(String(Number(x) / Number(y)));
+                        }
+                    }} />
+                </View>
+                <View style={styles.btn_full}>
+                    <Button title="Reset" color="#8A8A8E" onPress={() => {
+                        setZ("0");
+                        setX("");
+                        setY("");
+                        setSum("");
+                    }} />
+                </View>
             </View>
         </View>
     );
 }
 
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
+        paddingTop: 24,
         paddingHorizontal: 24,
         backgroundColor: '#F7F7F8',
     },
@@ -92,12 +117,20 @@ const styles = StyleSheet.create({
     },
     button_pack: {
         flexDirection: 'row',
-        justifyContent: 'space-evenly',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
         backgroundColor: '#FFFFFF',
         padding: 16,
         borderRadius: 20,
         borderWidth: 1,
         borderColor: '#E8E8EA',
         marginTop: 8,
+    },
+    btn: {
+        width: '48%',
+        marginBottom: 12,
+    },
+    btn_full: {
+        width: '100%',
     },
 });
